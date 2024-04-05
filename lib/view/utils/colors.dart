@@ -7,8 +7,10 @@ class CustomColors {
   static const red = Colors.red;
   static const purple = Color.fromRGBO(148, 159, 255, 0.927);
   static const grey = Colors.grey;
+  static const fadedblack = Color.fromRGBO(84, 84, 84, 1);
   static const lightGrey = Color.fromARGB(100, 196, 196, 196);
   static const cardClr = Color.fromARGB(255, 243, 243, 243);
   static const checkOrange = Color.fromRGBO(238, 125, 66, 1);
-  static const blue = Color.fromARGB(183, 40, 113, 240);
+  static const fadedblue = Color.fromARGB(183, 40, 113, 240);
+  static const blue = Color.fromARGB(183, 7, 79, 205);
 }

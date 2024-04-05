@@ -8,11 +8,13 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     required this.maxLen,
     required this.keyboardType,
+    this.validator,
   });
 
   final String hintText;
   final int maxLen;
   final TextInputType keyboardType;
+  final validator;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,16 @@ class CustomTextField extends StatelessWidget {
           borderSide: const BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.circular(12),
         ),
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(12),
+        ),
       ),
+      validator: validator,
     );
   }
 }

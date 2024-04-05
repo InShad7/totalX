@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:totalx/controller/login_provider/login_provider.dart';
+import 'package:totalx/view/otp_screen/otp_screen.dart';
 import 'package:totalx/view/utils/colors.dart';
 import 'package:totalx/view/utils/constants.dart';
 
@@ -12,49 +15,69 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<LoginController>(context);
     return Scaffold(
       backgroundColor: CustomColors.white,
       body: SafeArea(
-        child: Container(
-          height: MediaQuery.of(context).size.width + 100,
-          padding: const EdgeInsets.all(8),
-          margin: const EdgeInsets.all(8),
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.width / 2.5,
-                child: Image.asset('assets/images/image.png'),
-              ),
-              KConstants.kHeight40,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Form(
+              key: provider.formkey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Enter Phone Number',
-                    style: GoogleFonts.montserrat(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: CustomColors.black,
-                    ),
+                  KConstants.kHeight40,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width / 2.5,
+                    child: Image.asset('assets/images/image.png'),
                   ),
-                  KConstants.kHeight,
-                  const CustomTextField(
-                    hintText: 'Enter phone number *',
-                    keyboardType: TextInputType.number,
-                    maxLen: 10,
+                  KConstants.kHeight40,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Enter Phone Number',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: CustomColors.black,
+                        ),
+                      ),
+                      KConstants.kHeight,
+                      CustomTextField(
+                        hintText: 'Enter phone number *',
+                        keyboardType: TextInputType.number,
+                        maxLen: 10,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please enter a valid phone number';
+                          } else if (value.length < 10) {
+                            return 'Please enter a 10 digit number';
+                          }
+                        },
+                      ),
+                      KConstants.kHeight,
+                      const PrivacyPolicyTextCard(),
+                    ],
                   ),
-                  KConstants.kHeight,
-                  const PrivacyPolicyTextCard(),
+                  KConstants.kHeight40,
+                  CustomBtn(
+                    title: 'Get OTP',
+                    onPressed: () {
+                      if (provider.formkey.currentState!.validate()) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const OTPScreen(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ],
               ),
-              KConstants.kHeight40,
-              CustomBtn(
-                title: 'Get OTP',
-                onPressed: () {},
-              ),
-            ],
+            ),
           ),
         ),
       ),

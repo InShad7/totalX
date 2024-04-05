@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:totalx/view/utils/colors.dart';
@@ -26,7 +25,7 @@ class PrivacyPolicyTextCard extends StatelessWidget {
             style: GoogleFonts.montserrat(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: CustomColors.blue,
+              color: CustomColors.fadedblue,
             ),
           ),
           TextSpan(
